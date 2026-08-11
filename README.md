@@ -1,2110 +1,469 @@
-Conversation with Gemini
-redesign this entire into a high level attractive readme file for git
-
 <div align="center">
 
+# ⚡ AGENTLESS
 
+### Autonomous API Debugging & Self-Healing
 
-⚡ AGENTLESS
+**From production failure → verified fix → GitHub Pull Request**
 
-Autonomous API Debugging & Self-Healing
+[![PEC Hacks 4.0](https://img.shields.io/badge/Hackathon-PEC%20Hacks%204.0-blueviolet?style=for-the-badge)](https://github.com/NITISH-027/agentless-api-observability)
+[![Team Vulcan](https://img.shields.io/badge/Team-VULCAN-orange?style=for-the-badge)](https://github.com/NITISH-027/agentless-api-observability)
+[![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python&logoColor=white)](https://github.com/NITISH-027/agentless-api-observability)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111%2B-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://github.com/NITISH-027/agentless-api-observability)
+[![Next.js](https://img.shields.io/badge/Next.js-16.3-black?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://github.com/NITISH-027/agentless-api-observability)
+[![Tests](https://img.shields.io/badge/Tests-63%20Passed-success?style=for-the-badge&logo=pytest&logoColor=white)](https://github.com/NITISH-027/agentless-api-observability)
 
-From production failure → verified fix → GitHub Pull Request
+<br />
 
-<br>
+> Observability tells you that an API failed.  
+> **Agentless investigates why, reproduces the failure in isolation, verifies a fix, and prepares the Pull Request.**
 
-<a href="https://github.com/NITISH-027/agentless-api-observability">
-
-<img src="https://img.shields.io/badge/PEC%20HACKS-4.0-7C3AED?style=for-the-badge&labelColor=111827" alt="PEC Hacks 4.0">
-
-</a>
-
-<a href="https://github.com/NITISH-027/agentless-api-observability">
-
-<img src="https://img.shields.io/badge/STATUS-MVP%20READY-10B981?style=for-the-badge&labelColor=111827" alt="MVP Ready">
-
-</a>
-
-<a href="https://github.com/NITISH-027/agentless-api-observability">
-
-<img src="https://img.shields.io/badge/AI-POWERED-8B5CF6?style=for-the-badge&labelColor=111827" alt="AI Powered">
-
-</a>
-
-<br><br>
-
-
-
-Observability tells you that an API failed.
-
-Agentless investigates why, reproduces the failure, verifies a fix, and prepares the PR.
-
-<br>
-
-🚀 Explore Repository ·
-
-📖 Architecture ·
-
-🐛 Report Issue
+<p align="center">
+  <a href="#-quick-start">🚀 Quick Start</a> •
+  <a href="#-end-to-end-workflow">🔄 Workflow</a> •
+  <a href="#-core-innovation--verification-first-ai-debugging">🧠 Core Innovation</a> •
+  <a href="#-architecture">🏗️ Architecture</a> •
+  <a href="#-end-to-end-demo">🎬 Demo</a> •
+  <a href="#-technology-stack">🛠️ Stack</a> •
+  <a href="#-testing">🧪 Testing</a> •
+  <a href="#-safety--trust-model">🔐 Safety</a> •
+  <a href="#-team-vulcan">👥 Team</a>
+</p>
 
 </div>
 
+---
 
-
-
-
-🧨 The Problem
-
-Production API failures usually create a long chain of manual work.
-
-
-
-┌─────────────────┐
-
-│ 🚨 API FAILURE │
-
-└────────┬────────┘
-
-↓
-
-📋 Inspect Logs
-
-↓
-
-🔎 Read Traceback
-
-↓
-
-🗺️ Find Source
-
-↓
-
-🧠 Understand Cause
-
-↓
-
-🧪 Reproduce Bug
-
-↓
-
-✍️ Write Fix
-
-↓
-
-🧪 Run Tests
-
-↓
-
-🌿 Create Branch
-
-↓
-
-🔗 Open PR
-
-The hidden cost
-
-Developers don't just spend time finding the error.
-
-They spend time connecting:
-
-logs → source → root cause → reproduction → code change → validation → collaboration
-
-Most observability platforms stop around the first half.
-
-
-
-
-
-⚡ The Agentless Difference
+## 💡 One-Line Value Proposition
 
 <div align="center">
-
-
-
-FAILURE → INVESTIGATION → REPRODUCTION → PATCH → VERIFICATION → PR
-
+🚨 <b>Detect</b> the failure &nbsp;→&nbsp; 📥 <b>Ingest</b> &nbsp;→&nbsp; 🧬 <b>Fingerprint</b> &nbsp;→&nbsp; 🗺️ <b>Map</b> traceback &nbsp;→&nbsp; 🧠 <b>Analyze</b> cause &nbsp;→&nbsp; 🧪 <b>Reproduce</b> &nbsp;→&nbsp; 🩹 <b>Patch</b> &nbsp;→&nbsp; 🔬 <b>Verify</b> &nbsp;→&nbsp; 🚀 <b>Open PR</b>
 </div>
 
-Agentless turns the debugging lifecycle into one connected workflow.
+---
 
-<table>
+## 🚨 The Problem
 
-<tr>
+API failures usually kick off a highly fragmented, manual, and developer-intensive debugging cycle:
 
-<td width="50%" valign="top">
+```
+🚨 API FAILURE ──> 📋 Inspect Logs ──> 🔎 Read Traceback ──> 🗺️ Find Source File
+                                                                  │
+                                                                  ▼
+🔗 Open PR <── 🌿 Create Branch <── 🧪 Run Tests <── ✍️ Write Fix <── 🧠 Understand Root Cause <── 🧪 Reproduce Failure
+```
 
+Traditional observability tooling generally excels at detection, telemetry, logs, traces, and diagnostics. However, the subsequent repair workflow often remains completely developer-driven. Developers spend hours trying to check out the correct commit, reproduce the exact failure, propose safe fixes, and verify that the patch doesn't introduce regressions.
 
+---
 
-🔍 Traditional Observability
+## ⚡ The Agentless Difference
 
-📊 Detects failures
+| 🔍 Traditional Observability | ⚡ Agentless |
+| :--- | :--- |
+| **📊 Detects failures** | **📥 Ingests failure context** directly via REST endpoints |
+| **📝 Shows logs** | **🧬 Fingerprints incidents** using stable hashing mechanisms |
+| **🧵 Shows stack traces** | **🗺️ Maps tracebacks** directly to local workspace source lines |
+| **📈 Provides diagnostics** | **🧠 Generates root-cause hypotheses** using LLM providers |
+| **👨‍💻 Developer investigates** | **🧪 Generates reproduction** scripts and asserts the failure |
+| **👨‍💻 Developer writes fix** | **🩹 Generates candidate patches** target-focused on the bug |
+| **🧪 Developer validates** | **🔬 Automated verification** inside isolated Docker containers |
+| **🔗 Developer creates PR** | **🚀 GitHub PR automation** with verified details and logs |
 
-📝 Displays logs
+> **Traditional observability explains the incident. Agentless attempts to carry the incident through the repair workflow.**
 
-🧵 Shows stack traces
+---
 
-📈 Provides dashboards
+## 🔄 End-to-End Workflow
 
-👨‍💻 Developer takes over
+The Agentless pipeline guides an ingested log automatically through execution and verification blocks:
 
-Output:
-
-
-
-"Something went wrong."
-
-</td>
-
-<td width="50%" valign="top">
-
-
-
-⚡ Agentless
-
-📥 Ingests the failure
-
-🧬 Fingerprints the incident
-
-🗺️ Maps traceback to source
-
-🧠 Generates root-cause hypotheses
-
-🧪 Generates reproduction
-
-🩹 Generates candidate patch
-
-🔬 Executes verification
-
-🚀 Prepares GitHub PR
-
-Output:
-
-
-
-"Here is the verified fix."
-
-</td>
-
-</tr>
-
-</table>
-
-
-
-
-
-🧠 How It Works
-
+```mermaid
 flowchart LR
-
-A["🚨<br/>API Failure"]
-
-B["📥<br/>Ingest"]
-
-C["🧬<br/>Fingerprint"]
-
-D["🗺️<br/>Traceback<br/>Mapping"]
-
-E["🧠<br/>AI Root Cause"]
-
-F["🧪<br/>Reproduce"]
-
-G["🩹<br/>Patch"]
-
-H["🔬<br/>Verify"]
-
-I["🚀<br/>GitHub PR"]
-
-
-
-A --> B --> C --> D --> E --> F --> G --> H --> I
-
-
-
-style A fill:#DC2626,color:#fff,stroke:#7F1D1D
-
-style E fill:#7C3AED,color:#fff,stroke:#4C1D95
-
-style G fill:#F59E0B,color:#111,stroke:#92400E
-
-style H fill:#10B981,color:#fff,stroke:#065F46
-
-style I fill:#111827,color:#fff,stroke:#374151
-
-
-
-
-
-🔥 The Core Innovation
-
-Verification-First AI Debugging
-
-The most important design decision in Agentless is simple:
-
-
-
-AI-generated code is never trusted just because the model generated it.
-
-The patch must survive an execution-based safety gate.
-
-
-
-🧠 AI
-
-│
-
-▼
-
-┌──────────────┐
-
-│ Candidate Fix│
-
-└──────┬───────┘
-
-│
-
-▼
-
-┌───────────────────┐
-
-│ git apply --check │
-
-└─────────┬─────────┘
-
-│
-
-▼
-
-┌───────────────────┐
-
-│ Apply Patch │
-
-└─────────┬─────────┘
-
-│
-
-▼
-
-┌───────────────────┐
-
-│ Run Reproducer │
-
-└─────────┬─────────┘
-
-│
-
-▼
-
-┌───────────────────┐
-
-│ Run Regression │
-
-│ Test Suite │
-
-└─────────┬─────────┘
-
-│
-
-┌───────┴───────┐
-
-▼ ▼
-
-❌ FAIL ✅ PASS
-
-│ │
-
-▼ ▼
-
-Reject 🚀 PR
-
-The rule
-
-AI proposes. Execution proves.
-
-
-
-
-
-🧩 What Happens Inside the Pipeline?
-
-<details>
-
-<summary><b>01 · 📥 Failure Ingestion</b></summary>
-
-Agentless receives structured API failure information and creates an incident record.
-
-The system captures the information required for downstream investigation without forcing the developer to manually reconstruct the failure.
-
-</details>
-
-<details>
-
-<summary><b>02 · 🧬 Incident Fingerprinting</b></summary>
-
-Repeated failures are converted into stable fingerprints using incident characteristics such as:
-
-
-
-route
-
-error class
-
-error message
-
-stack frames
-
-source context
-
-This prevents the same underlying problem from becoming a collection of disconnected incidents.
-
-</details>
-
-<details>
-
-<summary><b>03 · 🛡️ Sensitive Data Scrubbing</b></summary>
-
-Sensitive request information is filtered before it reaches the investigation workflow.
-
-Examples:
-
-
-
-Authorization → [FILTERED]
-
-API-Key → [FILTERED]
-
-Cookie → [FILTERED]
-
-Session data → [FILTERED]
-
-</details>
-
-<details>
-
-<summary><b>04 · 🗺️ Traceback → Source Mapping</b></summary>
-
-A stack trace is mapped back to the relevant repository files.
-
-Instead of giving AI only:
-
-
-
-ValueError: quantity cannot be negative
-
-the investigation receives the failure together with relevant source context.
-
-</details>
-
-<details>
-
-<summary><b>05 · 🧠 Root-Cause Investigation</b></summary>
-
-The AI analysis layer reasons over:
-
-
-
-incident details
-
-traceback frames
-
-relevant source code
-
-repository context
-
-It returns structured hypotheses rather than a generic conversational answer.
-
-</details>
-
-<details>
-
-<summary><b>06 · 🧪 Failure Reproduction</b></summary>
-
-A reproducer is generated to demonstrate the failure.
-
-The test is executed in an isolated verification environment rather than directly against the developer's working tree.
-
-</details>
-
-<details>
-
-<summary><b>07 · 🩹 Patch Generation</b></summary>
-
-After selecting a hypothesis, Agentless generates a candidate code patch.
-
-The patch is treated as untrusted until verification succeeds.
-
-</details>
-
-<details>
-
-<summary><b>08 · 🔬 Patch Verification</b></summary>
-
-The verification engine:
-
-
-
-creates a clean workspace
-
-validates the patch
-
-applies the patch
-
-executes the reproducer
-
-runs the existing test suite
-
-determines whether the change is acceptable
-
-</details>
-
-<details>
-
-<summary><b>09 · 🚀 GitHub Automation</b></summary>
-
-After verification succeeds:
-
-
-
-Create Branch
-
-↓
-
-Commit Fix
-
-↓
-
-Push Branch
-
-↓
-
-Create Pull Request
-
-The final merge remains under developer control.
-
-</details>
-
-
-
-
-
-🎬 End-to-End Demo
-
-Example: Negative quantity API failure
-
-A sample API contains a failure where:
-
-
-
-quantity = -1
-
-causes an unhandled exception.
-
-Agentless processes it as:
-
-
-
-🚨 Production-style Failure
-
-↓
-
-📥 Incident Ingestion
-
-↓
-
-🧬 Fingerprint
-
-↓
-
-🗺️ Map Traceback → Source
-
-↓
-
-🧠 Root Cause Hypothesis
-
-↓
-
-🧪 Generate Reproducer
-
-↓
-
-🩹 Generate Patch
-
-↓
-
-🔬 git apply --check ✅
-
-↓
-
-🔬 Apply Patch ✅
-
-↓
-
-🧪 Reproducer ✅
-
-↓
-
-🧪 Regression Suite ✅
-
-↓
-
-🌿 Create Fix Branch ✅
-
-↓
-
-📤 Push to GitHub ✅
-
-↓
-
-🔗 Pull Request ✅
-
-Before
-
-POST /orders
-
-quantity=-1
-
-❌ HTTP 500
-
-Unhandled ValueError
-
-After verified fix
-
-POST /orders
-
-quantity=-1
-
-✅ HTTP 400
-
-Expected client error
-
-Result
-
-The fix is not considered successful until the system executes it and proves the original failure is resolved.
-
-
-
-
-
-📊 Verification Results
-
-<div align="center">
-
-VerificationResult📥 Patch endpoint✅ PASS📦 Clean workspace✅ PASS🔎 git apply --check✅ PASS🩹 Patch application✅ PASS🧪 Reproducer✅ PASS🧪 Existing test suite✅ PASS🚨 Original failure resolved✅ PASS🌿 Fix branch✅ PASS📤 Git push✅ PASS🔗 Pull Request✅ PASS
-
-10 / 10 verification stages passed
-
-</div>
-
-
-
-
-
-🏗️ Architecture
-
-flowchart TB
-
-
-
-subgraph CLIENT["🖥️ Client Layer"]
-
-UI["Next.js Dashboard"]
-
-end
-
-
-
-subgraph CORE["⚡ Agentless Core"]
-
-API["FastAPI API"]
-
-ING["Ingestion"]
-
-FP["Fingerprinting"]
-
-MAP["Traceback Mapper"]
-
-AI["AI Investigation"]
-
-REP["Reproduction"]
-
-PATCH["Patch Generator"]
-
-VER["Verification Engine"]
-
-end
-
-
-
-subgraph EXEC["📦 Execution Layer"]
-
-WS["Clean Git Workspace"]
-
-SB["Sandbox / Test Executor"]
-
-end
-
-
-
-subgraph EXT["🌐 External Systems"]
-
-LLM["OpenAI Provider"]
-
-GIT["Git"]
-
-GH["GitHub API"]
-
-end
-
-
-
-UI --> API
-
-API --> ING
-
-ING --> FP
-
-FP --> MAP
-
-MAP --> AI
-
-AI --> LLM
-
-AI --> REP
-
-AI --> PATCH
-
-REP --> VER
-
-PATCH --> VER
-
-VER --> WS
-
-WS --> SB
-
-VER --> GIT
-
-GIT --> GH
-
-
-
-
-
-🛠️ Technology Stack
-
-<div align="center">
-
-LayerTechnology🎨 DashboardNext.js + TypeScript⚡ APIFastAPI🐍 RuntimePython 3.10+🧠 AIOpenAI-compatible provider🐙 Version ControlGit + GitHub API🔬 VerificationGit + Pytest📦 IsolationSandbox / Docker execution🗄️ PersistenceSQLAlchemy + SQLite-compatible setup
-
-</div>
-
-
-
-
-
-📁 Project Structure
-
-agentless/
-
-│
-
-├── ⚡ backend/
-
-│ ├── app/
-
-│ │ ├── api/routes/
-
-│ │ ├── core/
-
-│ │ ├── models/
-
-│ │ ├── schemas/
-
-│ │ └── services/
-
-│ │ ├── analysis/
-
-│ │ ├── github/
-
-│ │ ├── ingestion/
-
-│ │ ├── patch/
-
-│ │ ├── reproduction/
-
-│ │ └── verification/
-
-│ │
-
-│ ├── tests/
-
-│ └── requirements.txt
-
-│
-
-├── 🎨 frontend/
-
-│ ├── app/
-
-│ │ ├── incidents/
-
-│ │ ├── investigations/
-
-│ │ ├── repositories/
-
-│ │ └── pull-requests/
-
-│ └── package.json
-
-│
-
-├── 🧪 sandbox/
-
-│ └── sample_repo/
-
-│
-
-├── 📜 scripts/
-
-├── 📚 docs/
-
-├── 🔐 .env.example
-
-├── 🛡️ .gitignore
-
-└── 📖 README.md
-
-
-
-
-
-🚀 Quick Start
-
-1. Clone
-
-git clone https://github.com/NITISH-027/agentless-api-observability.git
-
-cd agentless-api-observability
-
-2. Backend
-
-cd backend
-
-
-
-python -m venv .venv
-
-.venv\Scripts\Activate.ps1
-
-
-
-pip install -r requirements.txt
-
-
-
-python -m uvicorn app.main:app --port 8000
-
-API
-
-http://127.0.0.1:8000
-
-Swagger
-
-http://127.0.0.1:8000/docs
-
-3. Frontend
-
-Open another terminal:
-
-
-
-cd frontend
-
-npm install
-
-npm run dev
-
-Dashboard:
-
-
-
-http://localhost:3000
-
-
-
-
-
-🧠 AI Provider Modes
-
-Agentless supports both deterministic demonstration mode and live AI mode.
-
-<table>
-
-<tr>
-
-<td width="50%">
-
-
-
-🎭 Mock Mode
-
-Designed for:
-
-
-
-hackathon demos
-
-deterministic testing
-
-offline development
-
-reproducible evaluation
-
-LLM_PROVIDER=mock
-
-</td>
-
-<td width="50%">
-
-
-
-🧠 Live Mode
-
-Designed for genuine AI-powered investigation.
-
-
-
-LLM_PROVIDER=openai
-
-LLM_API_KEY=your_key
-
-Requires an API key with available quota.
-
-</td>
-
-</tr>
-
-</table>
-
-
-
-Demo transparency: the current hackathon demonstration uses the deterministic mock provider for reproducibility. The workspace verification, patch application, test execution, Git operations and GitHub integration are real.
-
-
-
-
-
-🧪 Testing
-
-Backend:
-
-
-
-cd backend
-
-.venv\Scripts\pytest -q
-
-Current backend suite:
-
-
-
-63 tests
-
-Frontend:
-
-
-
-cd frontend
-
-npm run build
-
-
-
-
-
-🔐 Safety Model
-
-Agentless is designed around controlled automation, not blind code execution.
-
-
-
-🛡️ 1. Scrub sensitive data
-
-Secrets and sensitive request information are filtered.
-
-
-
-📦 2. Use an isolated workspace
-
-Verification happens against a clean repository workspace.
-
-
-
-🔬 3. Execute before accepting
-
-A patch must pass:
-
-
-
-Patch validation
-
-+
-
-Reproducer
-
-+
-
-Regression tests
-
-👨‍💻 4. Keep humans in control
-
-Agentless prepares the Pull Request.
-
-A developer still decides whether it should be merged.
-
-
-
-
-
-🏆 Why This Matters
-
-The interesting part of Agentless is not simply:
-
-
-
-"We added AI to debugging."
-
-The interesting part is:
-
-
-
-"We connected AI reasoning to deterministic software verification."
-
-That changes the workflow from:
-
-
-
-AI says:
-
-"Here is a possible fix."
-
-to:
-
-
-
-AI says:
-
-"Here is a possible fix."
-
-
-
-System says:
-
-"Let's execute it."
-
-
-
-Tests say:
-
-"It works."
-
-
-
-GitHub says:
-
-"Here is the PR."
-
-
-
-
-
-📈 Current MVP Status
-
-CapabilityStatus📥 Failure ingestion✅🧬 Incident fingerprinting✅🛡️ Data scrubbing✅🗺️ Traceback mapping✅🧠 Hypothesis pipeline✅🧪 Reproduction pipeline✅🩹 Patch generation✅🔬 Patch verification✅🧪 Regression testing✅🌿 Git branch automation✅📤 Git push✅🔗 Pull Request creation✅🖥️ Web dashboard✅🎭 Mock LLM provider✅🧠 Live OpenAI provider✅*
-
-* Requires a funded API key with available quota.
-
-
-
-
-
-🔗 Repository
-
-<div align="center">
-
-
-
-⚡ github.com/NITISH-027/agentless-api-observability
-
-Read the code. Run the system. Inspect the verification flow.
-
-</div>
-
-
-
-
-
-👥 Team VULCAN
-
-<div align="center">
-
-
-
-🏫 Panimalar Engineering College · Chennai
-
-</div>
-
-MemberResponsibilityNitish P🧠 AI & Backend EngineeringNiranjan B⚙️ Systems & IntegrationNeal Patrick A🎨 Frontend Engineering
-
-
-
-
-
-<div align="center">
-
-
-
-⚡ VULCAN × AGENTLESS
-
-From production failure to verified Pull Request.
-
-Built for PEC Hacks 4.0
-
-<br>
-
-AI proposes. Execution proves.
-
-</div>
-
-Here is a complete, polished, modern GitHub README designed to give your project a polished open-source aesthetic using crisp formatting, clean layouts, and rich visual elements.
-
-Markdown
-<div align="center">
-
-# ⚡ AGENTLESS
-### Autonomous API Debugging & Self-Healing Pipeline
-**From production failure → verified fix → GitHub Pull Request**
-
-<br />
-
-[![PEC Hacks 4.0](https://img.shields.io/badge/PEC_HACKS-4.0-7C3AED?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![Status](https://img.shields.io/badge/STATUS-MVP_READY-10B981?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![AI Powered](https://img.shields.io/badge/AI-POWERED-8B5CF6?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![Python](https://img.shields.io/badge/PYTHON-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white&labelColor=111827)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FASTAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=111827)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/NEXT.JS-14-000000?style=for-the-badge&logo=next.js&logoColor=white&labelColor=111827)](https://nextjs.org)
-
-<br />
-
-> **Observability tells you that an API failed.**  
-> **Agentless investigates why, reproduces the failure, verifies a fix, and opens the PR.**
-
-[🚀 Quick Start](#-quick-start) • [📖 Architecture](#%EF%B8%8F-architecture) • [🐛 Pipeline](#-what-happens-inside-the-pipeline) • [🧠 AI Modes](#-ai-provider-modes)
-
-</div>
-
----
-
-## 🧨 The Problem
-
-Production API failures trigger a tedious, fragmented chain of manual engineering work:
-
-🚨 API FAILURE ──> 📋 Inspect Logs ──> 🔎 Read Traceback ──> 🗺️ Find Source Code
-│
-🔗 Open PR <── 🌿 Branch <── 🧪 Run Tests <── ✍️ Fix <── 🧪 Reproduce <── 🧠 Root Cause
-
-
-### The Hidden Cost
-Developers don't just spend time finding errors; they waste hours bridging disconnected tools across the debugging lifecycle:
-
-$$\text{Logs} \longrightarrow \text{Source} \longrightarrow \text{Root Cause} \longrightarrow \text{Reproduction} \longrightarrow \text{Code Patch} \longrightarrow \text{Validation} \longrightarrow \text{PR}$$
-
-> **Most observability platforms stop at the first half.**  
-> Agentless turns the entire debugging lifecycle into a single connected, automated workflow.
-
----
-
-## ⚡ The Agentless Difference
-
-<div align="center">
-
-`FAILURE` ➔ `INVESTIGATION` ➔ `REPRODUCTION` ➔ `PATCH` ➔ `VERIFICATION` ➔ `PULL REQUEST`
-
-</div>
-
-| 🔍 Traditional Observability | ⚡ Agentless Self-Healing |
-| :--- | :--- |
-| 📊 Detects failures | 📥 Ingests & fingerprints the failure |
-| 📝 Displays logs & dashboards | 🗺️ Maps tracebacks directly to source code |
-| 🧵 Shows stack traces | 🧠 Generates root-cause hypotheses |
-| 👨‍💻 **Developer takes over completely** | 🧪 Generates reproducer & candidate patch |
-| | 🔬 Executes safety verification suite |
-| | 🚀 Prepares & opens verified GitHub PR |
-| **Output:** *"Something went wrong."* | **Output:** *"Here is the verified fix."* |
-
----
-
-## 🔥 Core Innovation: Verification-First AI Debugging
-
-The fundamental design pillar of Agentless is simple: **AI-generated code is never trusted at face value.**  
-Every proposed patch must survive a strict execution-based safety gate before reaching a human developer.
-
-              🧠 AI Generator
-                     │
-                     ▼
-              ┌──────────────┐
-              │ Candidate Fix│
-              └──────┬───────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ git apply --check │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Apply Patch       │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Run Reproducer    │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Run Regression    │
-           │ Test Suite        │
-           └─────────┬─────────┘
-                     │
-             ┌───────┴───────┐
-             ▼               ▼
-          ❌ FAIL          ✅ PASS
-             │               │
-             ▼               ▼
-          Reject          🚀 Create PR
-
-> 💡 **The Gold Rule:** *AI proposes. Execution proves.*
-
----
-
-## 🧩 What Happens Inside the Pipeline?
-
-<details>
-<summary><b>01 · 📥 Failure Ingestion</b></summary>
-<br />
-Agentless receives structured API failure payloads and builds an incident record, capturing crucial execution telemetry without manual reconstruction.
-</details>
-
-<details>
-<summary><b>02 · 🧬 Incident Fingerprinting</b></summary>
-<br />
-Repeated failures are grouped into stable, unique fingerprints based on route signatures, error classes, stack frame hierarchies, and source context to prevent incident noise.
-</details>
-
-<details>
-<summary><b>03 · 🛡️ Sensitive Data Scrubbing</b></summary>
-<br />
-All sensitive telemetry data is redacted prior to LLM processing:
-<code>Authorization</code>, <code>API-Key</code>, <code>Cookie</code>, and session payloads are stripped automatically.
-</details>
-
-<details>
-<summary><b>04 · 🗺️ Traceback → Source Mapping</b></summary>
-<br />
-Raw stack traces are parsed and mapped directly to exact files and line numbers in the connected repository, supplying the AI with true source code context.
-</details>
-
-<details>
-<summary><b>05 · 🧠 Root-Cause Investigation</b></summary>
-<br />
-The AI reasoning engine evaluates incident context, traceback frames, and repository structure to produce structured hypotheses instead of vague conversational responses.
-</details>
-
-<details>
-<summary><b>06 · 🧪 Failure Reproduction</b></summary>
-<br />
-An automated reproducer test script is built and run inside an isolated verification sandbox to confirm the failure reliably triggers before attempting fixes.
-</details>
-
-<details>
-<summary><b>07 · 🩹 Patch Generation</b></summary>
-<br />
-Agentless constructs a targeted code patch corresponding to the primary failure hypothesis. The patch remains untrusted until full verification completes.
-</details>
-
-<details>
-<summary><b>08 · 🔬 Patch Verification</b></summary>
-<br />
-The verification engine provisions a clean workspace, executes <code>git apply --check</code>, applies the patch, executes the reproducer, and runs full regression test suites.
-</details>
-
-<details>
-<summary><b>09 · 🚀 GitHub Automation</b></summary>
-<br />
-Upon successful verification, Agentless creates a feature branch, commits changes, pushes to remote, and opens a Pull Request for human review.
-</details>
-
----
-
-## 🎬 End-to-End Demo Case
-
-### Scenario: Negative Quantity Payload Failure
-
-```http
-POST /orders
-Content-Type: application/json
-
-{ "quantity": -1 }
-BEFORE FIX:  ❌ HTTP 500 Internal Server Error (Unhandled ValueError)
-AFTER FIX:   ✅ HTTP 400 Bad Request (Expected validation error)
-Verification Stage Results
-VerificationResult
- ├── 📥 Patch Endpoint           ✅ PASS
- ├── 📦 Clean Workspace          ✅ PASS
- ├── 🔎 git apply --check        ✅ PASS
- ├── 🩹 Patch Application        ✅ PASS
- ├── 🧪 Reproducer Execution     ✅ PASS
- ├── 🧪 Existing Test Suite      ✅ PASS
- ├── 🚨 Original Failure Fixed   ✅ PASS
- ├── 🌿 Fix Branch Creation      ✅ PASS
- ├── 📤 Git Remote Push          ✅ PASS
- └── 🔗 Pull Request Creation    ✅ PASS
-
-[ 10 / 10 Verification Stages Passed ]
-🏗️ Architecture
-Code snippet
-flowchart TB
-    subgraph CLIENT["🖥️ Client Layer"]
-        UI["Next.js Dashboard"]
-    end
-
-    subgraph CORE["⚡ Agentless Core Engine"]
-        API["FastAPI App"]
-        ING["Ingestion"]
-        FP["Fingerprinting"]
-        MAP["Traceback Mapper"]
-        AI["AI Investigation"]
-        REP["Reproduction"]
-        PATCH["Patch Generator"]
-        VER["Verification Engine"]
-    end
-
-    subgraph EXEC["📦 Execution Layer"]
-        WS["Clean Workspace"]
-        SB["Sandbox / Test Executor"]
-    end
-
-    subgraph EXT["🌐 External Interfaces"]
-        LLM["OpenAI Provider"]
-        GIT["Git CLI"]
-        GH["GitHub API"]
-    end
-
-    UI --> API
-    API --> ING --> FP --> MAP --> AI
-    AI --> LLM
-    AI --> REP & PATCH
-    REP & PATCH --> VER
-    VER --> WS --> SB
-    VER --> GIT --> GH
-🛠️ Technology Stack
-Layer	Technology	Description
-Dashboard	Next.js 14 TypeScript Tailwind CSS	Web interface for monitoring incidents & PRs
-Core API	FastAPI Python 3.10+ Pydantic	Async backend API framework
-AI Layer	OpenAI API	LLM reasoning engine for root-cause analysis
-Verification	Pytest Git CLI Docker	Isolated execution & regression testing framework
-Database	SQLAlchemy SQLite/PostgreSQL	Relational persistence layer
-📁 Project Structure
-Plaintext
-agentless/
-├── ⚡ backend/
-│   ├── app/
-│   │   ├── api/routes/          # Ingestion & verification endpoints
-│   │   ├── core/                # Configuration & security settings
-│   │   ├── models/              # Database entities
-│   │   └── services/            # Pipeline modules (AI, Git, Reproduction)
-│   ├── tests/                   # Backend unit & integration test suite
-│   └── requirements.txt
-├── 🎨 frontend/                 # Next.js web application
-│   ├── app/                     # Incidents, Investigations & PR views
-│   └── package.json
-├── 🧪 sandbox/                  # Isolated environment for candidate testing
-├── 📜 scripts/                  # Utility & setup scripts
-└── 📖 README.md
-🚀 Quick Start
-1. Clone Repository
-Bash
-git clone [https://github.com/NITISH-027/agentless-api-observability.git](https://github.com/NITISH-027/agentless-api-observability.git)
-cd agentless-api-observability
-2. Launch Backend
-Bash
-cd backend
-
-# Create & activate virtual environment
-python -m venv .venv
-# On Windows (PowerShell):
-.venv\Scripts\Activate.ps1
-# On Linux/macOS:
-source .venv/bin/activate
-
-# Install dependencies & run API
-pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
-API Base: http://127.0.0.1:8000
-
-Swagger Docs: http://127.0.0.1:8000/docs
-
-3. Launch Frontend
-Bash
-# Open a new terminal session
-cd frontend
-npm install
-npm run dev
-Dashboard: http://localhost:3000
-
-🧠 AI Provider Modes
-Agentless supports both deterministic demonstration environments and live LLM integration:
-
-Mode	Configuration	Best Used For
-🎭 Mock Mode	LLM_PROVIDER=mock	Offline development, reproducible evaluations, hackathon presentations.
-🧠 Live Mode	LLM_PROVIDER=openaiLLM_API_KEY=your_key	Production environments, live automated reasoning & repair.
-ℹ️ Note on Hackathon Demo: The current demonstration uses the deterministic mock provider to guarantee complete submission stability. Workspace isolation, patch application, execution verification, and GitHub automation run on real systems.
-
-🔐 Safety Model
-Scrub Sensitive Telemetry: Automatic sanitization removes credentials, tokens, and authorization headers prior to analysis.
-
-Workspace Isolation: All verification tests execute within transient sandboxes without contaminating working source trees.
-
-Execution Verification Gate: No patch is considered unless it passes syntax checks, reproducer scripts, and existing unit tests.
-
-Human-in-the-Loop Governance: Agentless handles investigation and PR creation; human engineers make all final merge decisions.
-
-📈 MVP Status
-Capability	Status	Capability	Status
-📥 Failure Ingestion	✅	🩹 Patch Generation	✅
-🧬 Incident Fingerprinting	✅	🔬 Patch Verification	✅
-🛡️ Data Scrubbing	✅	🧪 Regression Testing	✅
-🗺️ Traceback Mapping	✅	🌿 Git Branch Automation	✅
-🧠 Hypothesis Pipeline	✅	📤 Git Push & PR Creation	✅
-🧪 Reproduction Pipeline	✅	🖥️ Next.js Web Dashboard	✅
-👥 Team VULCAN
-Panimalar Engineering College · Chennai
-
-Team Member	Domain Responsibility
-Nitish P	🧠 AI Architecture & Backend Engineering
-Niranjan B	⚙️ Core Systems Integration & Pipelines
-Neal Patrick A	🎨 Frontend Engineering & Dashboard UI
-⚡ VULCAN × AGENTLESS
-
-Built for PEC Hacks 4.0
-
-AI Proposes. Execution Proves.
-
-Want me to generate custom SVG project badges or custom social preview banners?
-
-Yes
-Generate custom SVG badges or visual assets for the Agentless repository README.
-
-SVG
-
-🏷️ Additional Modular Shields & Badges
-You can embed these SVG badge blocks directly into your Markdown files:
-
-1. Tech Stack Badges
-SVG
-
-2. Workflow Pillar Callout
-SVG
-
-give everything as a markdown file
-
-dont break the markdown file
-
-🚨 API FAILURE ──> 📋 Inspect Logs ──> 🔎 Read Traceback ──> 🗺️ Find Source Code
-│
-🔗 Open PR <── 🌿 Branch <── 🧪 Run Tests <── ✍️ Fix <── 🧪 Reproduce <── 🧠 Root Cause
-
-
-### The Hidden Cost
-Developers don't just spend time finding errors; they waste hours bridging disconnected tools across the debugging lifecycle:
-
-$$\\text{Logs} \\longrightarrow \\text{Source} \\longrightarrow \\text{Root Cause} \\longrightarrow \\text{Reproduction} \\longrightarrow \\text{Code Patch} \\longrightarrow \\text{Validation} \\longrightarrow \\text{PR}$$
-
-> **Most observability platforms stop at the first half.**  
-> Agentless turns the entire debugging lifecycle into a single connected, automated workflow.
-
----
-
-## ⚡ The Agentless Difference
-
-<div align="center">
-
-`FAILURE` ➔ `INVESTIGATION` ➔ `REPRODUCTION` ➔ `PATCH` ➔ `VERIFICATION` ➔ `PULL REQUEST`
-
-</div>
-
-| 🔍 Traditional Observability | ⚡ Agentless Self-Healing |
-| :--- | :--- |
-| 📊 Detects failures | 📥 Ingests & fingerprints the failure |
-| 📝 Displays logs & dashboards | 🗺️ Maps tracebacks directly to source code |
-| 🧵 Shows stack traces | 🧠 Generates root-cause hypotheses |
-| 👨‍💻 **Developer takes over completely** | 🧪 Generates reproducer & candidate patch |
-| | 🔬 Executes safety verification suite |
-| | 🚀 Prepares & opens verified GitHub PR |
-| **Output:** *"Something went wrong."* | **Output:** *"Here is the verified fix."* |
-
----
-
-## 🔥 Core Innovation: Verification-First AI Debugging
-
-The fundamental design pillar of Agentless is simple: **AI-generated code is never trusted at face value.**  
-Every proposed patch must survive a strict execution-based safety gate before reaching a human developer.
-
-              🧠 AI Generator
-                     │
-                     ▼
-              ┌──────────────┐
-              │ Candidate Fix│
-              └──────┬───────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ git apply --check │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Apply Patch       │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Run Reproducer    │
-           └─────────┬─────────┘
-                     │
-                     ▼
-           ┌───────────────────┐
-           │ Run Regression    │
-           │ Test Suite        │
-           └─────────┬─────────┘
-                     │
-             ┌───────┴───────┐
-             ▼               ▼
-          ❌ FAIL          ✅ PASS
-             │               │
-             ▼               ▼
-          Reject          🚀 Create PR
-
-> 💡 **The Gold Rule:** *AI proposes. Execution proves.*
-
----
-
-## 🧩 What Happens Inside the Pipeline?
-
-<details>
-<summary><b>01 · 📥 Failure Ingestion</b></summary>
-<br />
-Agentless receives structured API failure payloads and builds an incident record, capturing crucial execution telemetry without manual reconstruction.
-</details>
-
-<details>
-<summary><b>02 · 🧬 Incident Fingerprinting</b></summary>
-<br />
-Repeated failures are grouped into stable, unique fingerprints based on route signatures, error classes, stack frame hierarchies, and source context to prevent incident noise.
-</details>
-
-<details>
-<summary><b>03 · 🛡️ Sensitive Data Scrubbing</b></summary>
-<br />
-All sensitive telemetry data is redacted prior to LLM processing:
-<code>Authorization</code>, <code>API-Key</code>, <code>Cookie</code>, and session payloads are stripped automatically.
-</details>
-
-<details>
-<summary><b>04 · 🗺️ Traceback → Source Mapping</b></summary>
-<br />
-Raw stack traces are parsed and mapped directly to exact files and line numbers in the connected repository, supplying the AI with true source code context.
-</details>
-
-<details>
-<summary><b>05 · 🧠 Root-Cause Investigation</b></summary>
-<br />
-The AI reasoning engine evaluates incident context, traceback frames, and repository structure to produce structured hypotheses instead of vague conversational responses.
-</details>
-
-<details>
-<summary><b>06 · 🧪 Failure Reproduction</b></summary>
-<br />
-An automated reproducer test script is built and run inside an isolated verification sandbox to confirm the failure reliably triggers before attempting fixes.
-</details>
-
-<details>
-<summary><b>07 · 🩹 Patch Generation</b></summary>
-<br />
-Agentless constructs a targeted code patch corresponding to the primary failure hypothesis. The patch remains untrusted until full verification completes.
-</details>
-
-<details>
-<summary><b>08 · 🔬 Patch Verification</b></summary>
-<br />
-The verification engine provisions a clean workspace, executes <code>git apply --check</code>, applies the patch, executes the reproducer, and runs full regression test suites.
-</details>
-
-<details>
-<summary><b>09 · 🚀 GitHub Automation</b></summary>
-<br />
-Upon successful verification, Agentless creates a feature branch, commits changes, pushes to remote, and opens a Pull Request for human review.
-</details>
-
----
-
-## 🎬 End-to-End Demo Case
-
-### Scenario: Negative Quantity Payload Failure
-
-```http
-POST /orders
-Content-Type: application/json
-
-{ "quantity": -1 }
-BEFORE FIX:  ❌ HTTP 500 Internal Server Error (Unhandled ValueError)
-AFTER FIX:   ✅ HTTP 400 Bad Request (Expected validation error)
-Verification Stage Results
-VerificationResult
- ├── 📥 Patch Endpoint           ✅ PASS
- ├── 📦 Clean Workspace          ✅ PASS
- ├── 🔎 git apply --check        ✅ PASS
- ├── 🩹 Patch Application        ✅ PASS
- ├── 🧪 Reproducer Execution     ✅ PASS
- ├── 🧪 Existing Test Suite      ✅ PASS
- ├── 🚨 Original Failure Fixed   ✅ PASS
- ├── 🌿 Fix Branch Creation      ✅ PASS
- ├── 📤 Git Remote Push          ✅ PASS
- └── 🔗 Pull Request Creation    ✅ PASS
-
-[ 10 / 10 Verification Stages Passed ]
-🏗️ Architecture
-Code snippet
-flowchart TB
-    subgraph CLIENT["🖥️ Client Layer"]
-        UI["Next.js Dashboard"]
-    end
-
-    subgraph CORE["⚡ Agentless Core Engine"]
-        API["FastAPI App"]
-        ING["Ingestion"]
-        FP["Fingerprinting"]
-        MAP["Traceback Mapper"]
-        AI["AI Investigation"]
-        REP["Reproduction"]
-        PATCH["Patch Generator"]
-        VER["Verification Engine"]
-    end
-
-    subgraph EXEC["📦 Execution Layer"]
-        WS["Clean Workspace"]
-        SB["Sandbox / Test Executor"]
-    end
-
-    subgraph EXT["🌐 External Interfaces"]
-        LLM["OpenAI Provider"]
-        GIT["Git CLI"]
-        GH["GitHub API"]
-    end
-
-    UI --> API
-    API --> ING --> FP --> MAP --> AI
-    AI --> LLM
-    AI --> REP & PATCH
-    REP & PATCH --> VER
-    VER --> WS --> SB
-    VER --> GIT --> GH
-🛠️ Technology Stack
-Layer	Technology	Description
-Dashboard	Next.js 14 TypeScript Tailwind CSS	Web interface for monitoring incidents & PRs
-Core API	FastAPI Python 3.10+ Pydantic	Async backend API framework
-AI Layer	OpenAI API	LLM reasoning engine for root-cause analysis
-Verification	Pytest Git CLI Docker	Isolated execution & regression testing framework
-Database	SQLAlchemy SQLite/PostgreSQL	Relational persistence layer
-📁 Project Structure
-Plaintext
-agentless/
-├── ⚡ backend/
-│   ├── app/
-│   │   ├── api/routes/          # Ingestion & verification endpoints
-│   │   ├── core/                # Configuration & security settings
-│   │   ├── models/              # Database entities
-│   │   └── services/            # Pipeline modules (AI, Git, Reproduction)
-│   ├── tests/                   # Backend unit & integration test suite
-│   └── requirements.txt
-├── 🎨 frontend/                 # Next.js web application
-│   ├── app/                     # Incidents, Investigations & PR views
-│   └── package.json
-├── 🧪 sandbox/                  # Isolated environment for candidate testing
-├── 📜 scripts/                  # Utility & setup scripts
-└── 📖 README.md
-🚀 Quick Start
-1. Clone Repository
-Bash
-git clone [https://github.com/NITISH-027/agentless-api-observability.git](https://github.com/NITISH-027/agentless-api-observability.git)
-cd agentless-api-observability
-2. Launch Backend
-Bash
-cd backend
-
-# Create & activate virtual environment
-python -m venv .venv
-# On Windows (PowerShell):
-.venv\Scripts\Activate.ps1
-# On Linux/macOS:
-source .venv/bin/activate
-
-# Install dependencies & run API
-pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
-API Base: http://127.0.0.1:8000
-
-Swagger Docs: http://127.0.0.1:8000/docs
-
-3. Launch Frontend
-Bash
-# Open a new terminal session
-cd frontend
-npm install
-npm run dev
-Dashboard: http://localhost:3000
-
-🧠 AI Provider Modes
-Agentless supports both deterministic demonstration environments and live LLM integration:
-
-Mode	Configuration	Best Used For
-🎭 Mock Mode	LLM_PROVIDER=mock	Offline development, reproducible evaluations, hackathon presentations.
-🧠 Live Mode	LLM_PROVIDER=openaiLLM_API_KEY=your_key	Production environments, live automated reasoning & repair.
-ℹ️ Note on Hackathon Demo: The current demonstration uses the deterministic mock provider to guarantee complete submission stability. Workspace isolation, patch application, execution verification, and GitHub automation run on real systems.
-
-🔐 Safety Model
-Scrub Sensitive Telemetry: Automatic sanitization removes credentials, tokens, and authorization headers prior to analysis.
-
-Workspace Isolation: All verification tests execute within transient sandboxes without contaminating working source trees.
-
-Execution Verification Gate: No patch is considered unless it passes syntax checks, reproducer scripts, and existing unit tests.
-
-Human-in-the-Loop Governance: Agentless handles investigation and PR creation; human engineers make all final merge decisions.
-
-📈 MVP Status
-Capability	Status	Capability	Status
-📥 Failure Ingestion	✅	🩹 Patch Generation	✅
-🧬 Incident Fingerprinting	✅	🔬 Patch Verification	✅
-🛡️ Data Scrubbing	✅	🧪 Regression Testing	✅
-🗺️ Traceback Mapping	✅	🌿 Git Branch Automation	✅
-🧠 Hypothesis Pipeline	✅	📤 Git Push & PR Creation	✅
-🧪 Reproduction Pipeline	✅	🖥️ Next.js Web Dashboard	✅
-👥 Team VULCAN
-Panimalar Engineering College · Chennai
-
-Team Member	Domain Responsibility
-Nitish P	🧠 AI Architecture & Backend Engineering
-Niranjan B	⚙️ Core Systems Integration & Pipelines
-Neal Patrick A	🎨 Frontend Engineering & Dashboard UI
-⚡ VULCAN × AGENTLESS
-
-Built for PEC Hacks 4.0
-
-AI Proposes. Execution Proves.
-
-with open("README.md", "w", encoding="utf-8") as f:
-f.write(readme_content)
-
-print("README.md created successfully.")
-
-
-```text?code_stdout&code_event_index=1
-README.md created successfully.
-
-Your Markdown file is ready
-
-MD icon
-README
- MD 
-Open
-The entire updated, high-level project documentation has been saved directly as README.md. It includes shield badges, structured pipeline breakdowns, architecture diagrams, execution flow diagrams, setup commands, safety policies, and team details.
-
-
-
-
-Gemini is AI and can make mistakes.
-
-<div align="center">
-
-# ⚡ AGENTLESS
-### Autonomous API Debugging & Self-Healing Pipeline
-**From production failure → verified fix → GitHub Pull Request**
-
-<br />
-
-[![PEC Hacks 4.0](https://img.shields.io/badge/PEC_HACKS-4.0-7C3AED?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![Status](https://img.shields.io/badge/STATUS-MVP_READY-10B981?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![AI Powered](https://img.shields.io/badge/AI-POWERED-8B5CF6?style=for-the-badge&logoColor=white&labelColor=111827)](https://github.com/NITISH-027/agentless-api-observability)
-[![Python](https://img.shields.io/badge/PYTHON-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white&labelColor=111827)](https://python.org)
-[![FastAPI](https://img.shields.io/badge/FASTAPI-0.100+-009688?style=for-the-badge&logo=fastapi&logoColor=white&labelColor=111827)](https://fastapi.tiangolo.com)
-[![Next.js](https://img.shields.io/badge/NEXT.JS-14-000000?style=for-the-badge&logo=next.js&logoColor=white&labelColor=111827)](https://nextjs.org)
-
-<br />
-
-> **Observability tells you that an API failed.**  
-> **Agentless investigates why, reproduces the failure, verifies a fix, and opens the PR.**
-
-[🚀 Quick Start](#-quick-start) • [📖 Architecture](#%EF%B8%8F-architecture) • [🐛 Pipeline](#-what-happens-inside-the-pipeline) • [🧠 AI Modes](#-ai-provider-modes)
-
-</div>
-
----
-
-## 🧨 The Problem
-
-Production API failures trigger a tedious, fragmented chain of manual engineering work:
-
-```
-🚨 API FAILURE ──> 📋 Inspect Logs ──> 🔎 Read Traceback ──> 🗺️ Find Source Code
-                                                                   │
-🔗 Open PR <── 🌿 Branch <── 🧪 Run Tests <── ✍️ Fix <── 🧪 Reproduce <── 🧠 Root Cause
+    A["🚨 API Failure"] --> B["📥 Ingest Log"]
+    B --> C["🧬 Fingerprint & Scrub"]
+    C --> D["🗺️ Traceback Mapping"]
+    D --> E["🧠 AI Root-Cause"]
+    E --> F["🧪 Reproduce Failure"]
+    F --> G["🩹 Generate Patch"]
+    G --> H["🔬 Sandbox Verify"]
+    H --> I["🧪 Regression Tests"]
+    I --> J["🚀 GitHub Branch & PR"]
+
+    style A fill:#ff9999,stroke:#333,stroke-width:2px
+    style J fill:#b3ffb3,stroke:#333,stroke-width:2px
 ```
 
-### The Hidden Cost
-Developers don't just spend time finding errors; they waste hours bridging disconnected tools across the debugging lifecycle:
-
-$$\text{Logs} \longrightarrow \text{Source} \longrightarrow \text{Root Cause} \longrightarrow \text{Reproduction} \longrightarrow \text{Code Patch} \longrightarrow \text{Validation} \longrightarrow \text{PR}$$
-
-> **Most observability platforms stop at the first half.**  
-> Agentless turns the entire debugging lifecycle into a single connected, automated workflow.
-
 ---
 
-## ⚡ The Agentless Difference
+## 🔥 Core Innovation — Verification-First AI Debugging
 
-<div align="center">
+AI-generated code should not be trusted blindly. Agentless operates under a strict verification framework:
 
-`FAILURE` ➔ `INVESTIGATION` ➔ `REPRODUCTION` ➔ `PATCH` ➔ `VERIFICATION` ➔ `PULL REQUEST`
+> 💡 **AI proposes. Execution proves.**
 
-</div>
-
-| 🔍 Traditional Observability | ⚡ Agentless Self-Healing |
-| :--- | :--- |
-| 📊 Detects failures | 📥 Ingests & fingerprints the failure |
-| 📝 Displays logs & dashboards | 🗺️ Maps tracebacks directly to source code |
-| 🧵 Shows stack traces | 🧠 Generates root-cause hypotheses |
-| 👨‍💻 **Developer takes over completely** | 🧪 Generates reproducer & candidate patch |
-| | 🔬 Executes safety verification suite |
-| | 🚀 Prepares & opens verified GitHub PR |
-| **Output:** *"Something went wrong."* | **Output:** *"Here is the verified fix."* |
-
----
-
-## 🔥 Core Innovation: Verification-First AI Debugging
-
-The fundamental design pillar of Agentless is simple: **AI-generated code is never trusted at face value.**  
-Every proposed patch must survive a strict execution-based safety gate before reaching a human developer.
+Instead of letting an LLM write code directly to production, Agentless treats the AI as a generator of *hypotheses*. Every patch must prove its validity by resolving a dynamically generated reproducer test without causing regressions or suppressing symptoms.
 
 ```
                   🧠 AI Generator
                          │
                          ▼
-                  ┌──────────────┐
-                  │ Candidate Fix│
-                  └──────┬───────┘
+                 🩹 Candidate Patch
                          │
                          ▼
-               ┌───────────────────┐
-               │ git apply --check │
-               └─────────┬─────────┘
+              🔬 Patch Validation Block
                          │
-                         ▼
-               ┌───────────────────┐
-               │ Apply Patch       │
-               └─────────┬─────────┘
+     ┌───────────────────┴───────────────────┐
+     ▼                                       ▼
+📦 Clean Workspace Check               🧪 Reproducer Run
+     │                                       │
+     ▼                                       ▼
+🧪 Regression Testing                 🛡️ Suppression Filter
+     │                                       │
+     └───────────────────┬───────────────────┘
                          │
-                         ▼
-               ┌───────────────────┐
-               │ Run Reproducer    │
-               └─────────┬─────────┘
-                         │
-                         ▼
-               ┌───────────────────┐
-               │ Run Regression    │
-               │ Test Suite        │
-               └─────────┬─────────┘
-                         │
-                 ┌───────┴───────┐
-                 ▼               ▼
-              ❌ FAIL          ✅ PASS
-                 │               │
-                 ▼               ▼
-              Reject          🚀 Create PR
+               ┌─────────┴─────────┐
+               ▼                   ▼
+           ❌ Reject            ✅ Accept
+                                   │
+                                   ▼
+                            🚀 Pull Request
 ```
 
-> 💡 **The Gold Rule:** *AI proposes. Execution proves.*
-
 ---
 
-## 🧩 What Happens Inside the Pipeline?
+## 🧩 Inside the Pipeline
 
 <details>
-<summary><b>01 · 📥 Failure Ingestion</b></summary>
-<br />
-Agentless receives structured API failure payloads and builds an incident record, capturing crucial execution telemetry without manual reconstruction.
+<summary>📥 <b>01 — Failure Ingestion</b></summary>
+
+Accepts raw structured JSON payloads of application exceptions via `POST /logs` with zero SDK dependencies.
 </details>
 
 <details>
-<summary><b>02 · 🧬 Incident Fingerprinting</b></summary>
-<br />
-Repeated failures are grouped into stable, unique fingerprints based on route signatures, error classes, stack frame hierarchies, and source context to prevent incident noise.
+<summary>🧬 <b>02 — Incident Fingerprinting</b></summary>
+
+Computes a stable SHA-256 fingerprint for incoming exceptions based on the HTTP method, normalized route path (scrubbing IDs/UUIDs), error type, and stack frame contexts to automatically deduplicate duplicates.
 </details>
 
 <details>
-<summary><b>03 · 🛡️ Sensitive Data Scrubbing</b></summary>
-<br />
-All sensitive telemetry data is redacted prior to LLM processing:
-<code>Authorization</code>, <code>API-Key</code>, <code>Cookie</code>, and session payloads are stripped automatically.
+<summary>🛡️ <b>03 — Sensitive Data Scrubbing</b></summary>
+
+Filters authorization tokens, API keys, cookies, and session headers to `[FILTERED]` case-insensitively before persistence.
 </details>
 
 <details>
-<summary><b>04 · 🗺️ Traceback → Source Mapping</b></summary>
-<br />
-Raw stack traces are parsed and mapped directly to exact files and line numbers in the connected repository, supplying the AI with true source code context.
+<summary>🗺️ <b>04 — Traceback → Source Mapping</b></summary>
+
+Parses tracebacks and maps relative stack frame file paths to target workspaces, locating the exact lines where the failure originated.
 </details>
 
 <details>
-<summary><b>05 · 🧠 Root-Cause Investigation</b></summary>
-<br />
-The AI reasoning engine evaluates incident context, traceback frames, and repository structure to produce structured hypotheses instead of vague conversational responses.
+<summary>🧠 <b>05 — Root-Cause Investigation</b></summary>
+
+Generates competing root-cause hypotheses based on stack traces, context files, and AST call graphs.
 </details>
 
 <details>
-<summary><b>06 · 🧪 Failure Reproduction</b></summary>
-<br />
-An automated reproducer test script is built and run inside an isolated verification sandbox to confirm the failure reliably triggers before attempting fixes.
+<summary>🧪 <b>06 — Failure Reproduction</b></summary>
+
+Compiles the failure context into a targeted Pytest reproducer script asserting the original exception class.
 </details>
 
 <details>
-<summary><b>07 · 🩹 Patch Generation</b></summary>
-<br />
-Agentless constructs a targeted code patch corresponding to the primary failure hypothesis. The patch remains untrusted until full verification completes.
+<summary>🩹 <b>07 — Patch Generation</b></summary>
+
+Generates the smallest, target-focused code diff (Unified Git Patch) designed to resolve the verified root cause.
 </details>
 
 <details>
-<summary><b>08 · 🔬 Patch Verification</b></summary>
-<br />
-The verification engine provisions a clean workspace, executes <code>git apply --check</code>, applies the patch, executes the reproducer, and runs full regression test suites.
+<summary>🔬 <b>08 — Patch Verification</b></summary>
+
+Clones a clean workspace, applies the patch, and executes the reproducer test inside an isolated Docker sandbox. The engine rejects patches that fail the test, timeout (detecting infinite loops), or attempt symptom suppression (e.g., swallowing exceptions with `except: pass`).
 </details>
 
 <details>
-<summary><b>09 · 🚀 GitHub Automation</b></summary>
-<br />
-Upon successful verification, Agentless creates a feature branch, commits changes, pushes to remote, and opens a Pull Request for human review.
+<summary>🚀 <b>09 — GitHub Automation</b></summary>
+
+If verified, it creates a new branch (`ai-fix/incident-ID`), commits, pushes, opens a GitHub Pull Request with full analysis evidence, and adds labels `["ai-generated", "bug-fix", "verified"]`.
 </details>
 
 ---
 
-## 🎬 End-to-End Demo Case
+## 🎬 End-to-End Demo
 
-### Scenario: Negative Quantity Payload Failure
+Consider an order processing endpoint that crashes on invalid input:
 
 ```http
 POST /orders
 Content-Type: application/json
 
-{ "quantity": -1 }
+{
+  "product_id": 101,
+  "quantity": -1
+}
 ```
 
+### Before
+```response
+🚨 HTTP 500 Internal Server Error
+ValueError: quantity cannot be negative
 ```
-BEFORE FIX:  ❌ HTTP 500 Internal Server Error (Unhandled ValueError)
-AFTER FIX:   ✅ HTTP 400 Bad Request (Expected validation error)
+*The unhandled `ValueError` crashes the API.*
+
+### Agentless Workflow In Action
+1. **Ingest & Fingerprint**: Logs `ValueError` at `app/orders.py:3`.
+2. **Reproduce**: Generates a Pytest script verifying that sending a negative quantity triggers the unhandled error.
+3. **Patch**: Generates a unified patch to catch negative inputs and return `HTTPException(400)`.
+4. **Verify**: Runs the reproducer against the patched code inside the sandbox.
+
+### After
+```response
+✅ HTTP 400 Bad Request
+{
+  "detail": "quantity cannot be negative"
+}
 ```
 
-### Verification Stage Results
-
-```
-VerificationResult
- ├── 📥 Patch Endpoint           ✅ PASS
- ├── 📦 Clean Workspace          ✅ PASS
- ├── 🔎 git apply --check        ✅ PASS
- ├── 🩹 Patch Application        ✅ PASS
- ├── 🧪 Reproducer Execution     ✅ PASS
- ├── 🧪 Existing Test Suite      ✅ PASS
- ├── 🚨 Original Failure Fixed   ✅ PASS
- ├── 🌿 Fix Branch Creation      ✅ PASS
- ├── 📤 Git Remote Push          ✅ PASS
- └── 🔗 Pull Request Creation    ✅ PASS
-
-[ 10 / 10 Verification Stages Passed ]
-```
+### Verification Execution Report
+| Verification Stage | Result | Details |
+| :--- | :--- | :--- |
+| **📥 Patch Endpoint** | ✅ Passed | Patch successfully parsed |
+| **📦 Clean Workspace** | ✅ Passed | Isolated clone checked out |
+| **🔎 Patch Validation** | ✅ Passed | Syntactically correct diff |
+| **🩹 Patch Application** | ✅ Passed | Clean `git apply` without conflicts |
+| **🧪 Reproducer Execution** | ✅ Passed | Test ran inside sandbox container |
+| **🧪 Regression Testing** | ✅ Passed | Existing project tests continue to pass |
+| **🌿 Branch Creation** | ✅ Passed | Branch `ai-fix/incident-inc_...` created |
+| **📤 Git Push** | ✅ Passed | Changes pushed to origin |
+| **🔗 Pull Request** | ✅ Passed | PR opened on GitHub |
 
 ---
 
 ## 🏗️ Architecture
 
 ```mermaid
-flowchart TB
-    subgraph CLIENT["🖥️ Client Layer"]
-        UI["Next.js Dashboard"]
+flowchart TD
+    subgraph Client Layer
+        A["🎨 Next.js Dashboard"]
     end
 
-    subgraph CORE["⚡ Agentless Core Engine"]
-        API["FastAPI App"]
-        ING["Ingestion"]
-        FP["Fingerprinting"]
-        MAP["Traceback Mapper"]
-        AI["AI Investigation"]
-        REP["Reproduction"]
-        PATCH["Patch Generator"]
-        VER["Verification Engine"]
+    subgraph Backend Layer ["⚡ Agentless Core (FastAPI)"]
+        B["📥 Ingest Route"]
+        C["🧬 Fingerprinting"]
+        D["🗺️ Traceback Mapper"]
+        E["🧠 AI Investigation"]
+        F["🧪 Reproduction Mgr"]
+        G["🩹 Patch Generator"]
+        H["🔬 Verification Engine"]
     end
 
-    subgraph EXEC["📦 Execution Layer"]
-        WS["Clean Workspace"]
-        SB["Sandbox / Test Executor"]
+    subgraph Sandbox ["📦 Sandbox Layer"]
+        I["🐳 Docker container (python:3.10-slim)"]
+        J["🐍 Subprocess Fallback"]
     end
 
-    subgraph EXT["🌐 External Interfaces"]
-        LLM["OpenAI Provider"]
-        GIT["Git CLI"]
-        GH["GitHub API"]
+    subgraph External ["🌐 External Integrations"]
+        K["🧠 OpenAI API / Mock API"]
+        L["🐙 Git Workspace"]
+        M["🚀 GitHub API"]
     end
 
-    UI --> API
-    API --> ING --> FP --> MAP --> AI
-    AI --> LLM
-    AI --> REP & PATCH
-    REP & PATCH --> VER
-    VER --> WS --> SB
-    VER --> GIT --> GH
+    A <--> B
+    B --> C --> D --> E --> F --> G --> H
+    H <--> Sandbox
+    Sandbox --> I
+    Sandbox --> J
+    E <--> K
+    G <--> K
+    F <--> K
+    H <--> L
+    H <--> M
 ```
 
 ---
 
 ## 🛠️ Technology Stack
 
-| Layer | Technology | Description |
+| Layer | Technology | Purpose |
 | :--- | :--- | :--- |
-| **Dashboard** | `Next.js 14` `TypeScript` `Tailwind CSS` | Web interface for monitoring incidents & PRs |
-| **Core API** | `FastAPI` `Python 3.10+` `Pydantic` | Async backend API framework |
-| **AI Layer** | `OpenAI API` | LLM reasoning engine for root-cause analysis |
-| **Verification** | `Pytest` `Git CLI` `Docker` | Isolated execution & regression testing framework |
-| **Database** | `SQLAlchemy` `SQLite/PostgreSQL` | Relational persistence layer |
+| **🎨 Frontend** | **Next.js 16 + React 19 + TS** | Dashboard UI and interactive control center |
+| **⚡ Backend** | **FastAPI + Python 3.10+** | High-performance async core API & pipelines |
+| **🧠 AI / LLM** | **OpenAI (`gpt-4o-mini`) / Mock** | Incident analysis, reproducer & patch generation |
+| **🗄️ Database** | **SQLite + SQLAlchemy** | Persistence for Incidents, Hypotheses & Logs |
+| **🐳 Sandbox** | **Docker (`python:3.10-slim`)** | Isolated environments for running reproducer scripts |
+| **🐙 Version Control** | **Git** | Automated patch branches and git actions |
+| **🚀 Integration** | **GitHub REST API** | Creating pull requests and managing issues/labels |
+| **🧪 Testing** | **Pytest** | Running local verification test suites |
 
 ---
 
 ## 📁 Project Structure
 
-```text
+```
 agentless/
-├── ⚡ backend/
+├── ⚡ backend/                 # FastAPI Backend Codebase
 │   ├── app/
-│   │   ├── api/routes/          # Ingestion & verification endpoints
-│   │   ├── core/                # Configuration & security settings
-│   │   ├── models/              # Database entities
-│   │   └── services/            # Pipeline modules (AI, Git, Reproduction)
-│   ├── tests/                   # Backend unit & integration test suite
-│   └── requirements.txt
-├── 🎨 frontend/                 # Next.js web application
-│   ├── app/                     # Incidents, Investigations & PR views
-│   └── package.json
-├── 🧪 sandbox/                  # Isolated environment for candidate testing
-├── 📜 scripts/                  # Utility & setup scripts
-└── 📖 README.md
+│   │   ├── api/routes/        # health, logs, and github API routes
+│   │   ├── core/              # config, database connection, and logging
+│   │   ├── models/            # SQLAlchemy DB entities
+│   │   ├── schemas/           # Pydantic schemas for request validations
+│   │   └── services/          # Core Business Logic services
+│   │       ├── analysis/      # Traceback mapping, LLM providers, and AST parser
+│   │       ├── github/        # Git client, workspace clones, and PR manager
+│   │       ├── ingestion/     # Scrubbers & fingerprinting
+│   │       ├── patch/         # Patch generators
+│   │       └── reproduction/  # Sandbox executors & reproducer managers
+│   └── tests/                 # 63 backend tests covering core functionality
+├── 🎨 frontend/                # Next.js Dashboard App Router
+│   ├── app/                   # Dashboard Page routes
+│   ├── components/            # Interactive dashboard UI components
+│   └── lib/                   # API Client communication utility
+├── 🧪 sandbox/                 # Sandbox and environment setup helpers
+├── 📜 scripts/                 # Developer start & verification tools
+├── 📖 README.md               # Visual Platform Guide (this file)
+└── 🔐 .env.example             # Base configuration details
 ```
 
 ---
 
 ## 🚀 Quick Start
 
-### 1. Clone Repository
+### Prerequisites
+* **Python 3.10+**
+* **Node.js 18+** and **npm**
+* **Docker** (Optional, falls back to local subprocess sandbox run if absent)
+
+### 01 — Clone and Environment Setup
+Clone the repository and copy the environment template:
 ```bash
 git clone https://github.com/NITISH-027/agentless-api-observability.git
 cd agentless-api-observability
+cp .env.example .env
 ```
+Update `.env` with your OpenAI API keys and GitHub tokens.
 
-### 2. Launch Backend
+### 02 — Backend Service
+Initialize the virtual environment, install requirements, and run the FastAPI server:
 ```bash
 cd backend
-
-# Create & activate virtual environment
 python -m venv .venv
 # On Windows (PowerShell):
 .venv\Scripts\Activate.ps1
 # On Linux/macOS:
 source .venv/bin/activate
 
-# Install dependencies & run API
 pip install -r requirements.txt
-python -m uvicorn app.main:app --reload --port 8000
+uvicorn app.main:app --reload --port 8000
 ```
-- **API Base:** `http://127.0.0.1:8000`
-- **Swagger Docs:** `http://127.0.0.1:8000/docs`
+Backend Swagger docs will be available at [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs).
 
-### 3. Launch Frontend
+### 03 — Frontend Dashboard
+Install Node dependencies and start the development server:
 ```bash
-# Open a new terminal session
-cd frontend
+cd ../frontend
 npm install
 npm run dev
 ```
-- **Dashboard:** `http://localhost:3000`
+Open [http://localhost:3000](http://localhost:3000) to view the interactive dashboard.
 
 ---
 
-## 🧠 AI Provider Modes
+## 🎭 AI Provider Modes
 
-Agentless supports both deterministic demonstration environments and live LLM integration:
+Agentless supports two execution modes for flexible testing and production runs:
 
-| Mode | Configuration | Best Used For |
+| 🎭 Mode | Provider Config | Description |
 | :--- | :--- | :--- |
-| **🎭 Mock Mode** | `LLM_PROVIDER=mock` | Offline development, reproducible evaluations, hackathon presentations. |
-| **🧠 Live Mode** | `LLM_PROVIDER=openai`<br />`LLM_API_KEY=your_key` | Production environments, live automated reasoning & repair. |
-
-> ℹ️ **Note on Hackathon Demo:** The current demonstration uses the deterministic **mock provider** to guarantee complete submission stability. Workspace isolation, patch application, execution verification, and GitHub automation run on real systems.
+| **Mock Mode** | `LLM_PROVIDER=mock` | Deterministic responses used for local demos, quick testing, and offline hackathon showcases without consuming API keys. |
+| **Live AI Mode** | `LLM_PROVIDER=openai` | Uses `gpt-4o-mini` with your configured `LLM_API_KEY` to run actual AST-based analysis and code patch generations. |
 
 ---
 
-## 🔐 Safety Model
+## 🔐 Safety & Trust Model
 
-1. **Scrub Sensitive Telemetry:** Automatic sanitization removes credentials, tokens, and authorization headers prior to analysis.
-2. **Workspace Isolation:** All verification tests execute within transient sandboxes without contaminating working source trees.
-3. **Execution Verification Gate:** No patch is considered unless it passes syntax checks, reproducer scripts, and existing unit tests.
-4. **Human-in-the-Loop Governance:** Agentless handles investigation and PR creation; **human engineers make all final merge decisions**.
+Autonomous code execution requires safety boundaries. Agentless implements security safeguards:
+
+* **🛡️ Sensitive Data Scrubbing**: High-entropy tokens, passwords, session cookies, and authentication headers are stripped before saving.
+* **📦 Workspace Isolation**: Git checkouts are cloned into separate, short-lived paths inside `/workspace` and deleted immediately after verification.
+* **🐳 Sandbox Isolation**: Patched code and tests execute inside isolated Docker containers to prevent malicious runtime damage.
+* **🔎 Patch Validation**: Programmatic AST and regex checks block patches attempting symptom suppression or generic exception swallowing.
+* **👨‍💻 Human Review Gate**: Pull requests are proposed as branches with clear labels (`ai-generated`) allowing developer audit before final merging.
+
+---
+
+## 🧪 Testing
+
+The codebase includes a fully-featured integration and unit testing suite.
+
+```bash
+cd backend
+.venv\Scripts\pytest
+```
+
+#### Test Execution Result
+* **Total Tests**: **63 Items**
+* **Result**: **63 Passed**
+* **Coverage**: AST analyzer, configurations, GitHub clients, ingestion scrubbers, patch validators, reproducer sandboxes, and verification systems.
 
 ---
 
 ## 📈 MVP Status
 
-| Capability | Status | Capability | Status |
-| :--- | :---: | :--- | :---: |
-| 📥 Failure Ingestion | ✅ | 🩹 Patch Generation | ✅ |
-| 🧬 Incident Fingerprinting | ✅ | 🔬 Patch Verification | ✅ |
-| 🛡️ Data Scrubbing | ✅ | 🧪 Regression Testing | ✅ |
-| 🗺️ Traceback Mapping | ✅ | 🌿 Git Branch Automation | ✅ |
-| 🧠 Hypothesis Pipeline | ✅ | 📤 Git Push & PR Creation | ✅ |
-| 🧪 Reproduction Pipeline | ✅ | 🖥️ Next.js Web Dashboard | ✅ |
+| Pipeline Capability | Status |
+| :--- | :--- |
+| **📥 Failure Ingestion** | ✅ Completed |
+| **🧬 Fingerprinting** | ✅ Completed |
+| **🛡️ Data Scrubbing** | ✅ Completed |
+| **🗺️ Traceback Mapping** | ✅ Completed |
+| **🧠 AI Investigation** | ✅ Completed |
+| **🧪 Failure Reproduction** | ✅ Completed |
+| **🩹 Patch Generation** | ✅ Completed |
+| **🔬 Isolated Sandbox Verification** | ✅ Completed |
+| **🧪 Regression Testing** | ✅ Completed |
+| **🌿 Git Branch Automation** | ✅ Completed |
+| **🚀 GitHub PR Creation** | ✅ Completed |
+| **🎨 Next.js Dashboard UI** | ✅ Completed |
+
+---
+
+## 🏆 Why Agentless Matters
+
+Traditional AI software agents are often complex, hard to configure, and can behave unpredictably. Agentless introduces a lightweight, robust alternative:
+
+* **Zero SDK/Agent Footprint**: Integrates cleanly into any existing logging stack via standard API payloads.
+* **Execution Proves All**: Bypasses the uncertainty of LLM code generation by forcing code verification through isolated tests.
+* **Developer Centric**: Fits seamlessly into standard GitHub workflows with descriptive, clear PRs that reduce developer triage time.
 
 ---
 
 ## 👥 Team VULCAN
 
-> **Panimalar Engineering College · Chennai**
+<div align="center">
 
-| Team Member | Domain Responsibility |
+### 🏆 VULCAN
+**Panimalar Engineering College**  
+📍 Chennai, India
+
+| 👤 Member | 🎯 Focus |
 | :--- | :--- |
 | **Nitish P** | 🧠 AI Architecture & Backend Engineering |
 | **Niranjan B** | ⚙️ Core Systems Integration & Pipelines |
 | **Neal Patrick A** | 🎨 Frontend Engineering & Dashboard UI |
 
-<br />
+</div>
+
+---
 
 <div align="center">
 
 **⚡ VULCAN × AGENTLESS**  
-*Built for PEC Hacks 4.0*
+*From production failure to verified Pull Request.*
 
-`AI Proposes. Execution Proves.`
+**Built for PEC Hacks 4.0**
+
+<br />
+
+🧠 **AI Proposes.** &nbsp;&nbsp;•&nbsp;&nbsp; 🔬 **Execution Proves.**
 
 </div>
